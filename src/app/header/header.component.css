@@ -1,32 +1,32 @@
-header{
+.appheader{
     height: 50px;
+    width: 100%;
     display: flex;
-}
-li,a{
-    color: #000;
-    font-size: 16px;
-    text-decoration: none;
-    list-style-type: none;
-}
-header .left_links{
-    display: flex;
-    float: left;
-    
-}
-header .right_links{
-    display: flex;
-    
-}
-.left_links li,.right_links li{
-    padding: 5px;
-    margin: 10px 10px;
 }
 
-.main-heading{
-font-weight: bolder;
+.appheader .left_links,.right_links{
+    display: flex;
+}
+
+li,a{
+    color:#000;
+    list-style: none;
+    text-decoration: none;
+}
+
+.appheader .left_links li,.right_links li{
+    padding: 5px;
+    margin-right: 15px;
+    font-size: 16px;
+}
+ 
+.appheader .main-heading{
+font-weight: 700;
 padding: 10px;
 font-size: 30px;
-color: #000;
-  flex-grow: 1;
-  text-align: center;
+margin: 0 auto;
+}
+
+.right_links{
+    margin-right: 40px;
 }
