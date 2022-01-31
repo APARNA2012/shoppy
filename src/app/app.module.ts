@@ -4,24 +4,33 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { CategoriesComponent } from './categories/categories.component';
 import { FooterComponent } from './footer/footer.component';
-import { GridComponent } from './grid/grid.component';
-import {MatBadgeModule} from '@angular/material/badge';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+ 
+
+
+import { BadgeDirective } from './badge.directive';  
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    CategoriesComponent,
     FooterComponent,
-    GridComponent,
-    
+    BadgeDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatBadgeModule
+    BrowserAnimationsModule,
+   
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
-  
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DesignUtilityService } from '../design-utility.service';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  constructor( private _du:DesignUtilityService) { 
+    this._du.ItemCounts.subscribe((res: number | undefined)=>{
+      this.ItemCounts=res;
+    })
+  }
 
-  constructor() { }
+ItemCounts:number | undefined;
 
   ngOnInit(): void {
   }
