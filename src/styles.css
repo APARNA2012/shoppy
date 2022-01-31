@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.app-badge{
+    position: fixed;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: green;
+    color: #fff;
+    transform: translate(50%,-50%);
+    font-size: 16px;
+}
