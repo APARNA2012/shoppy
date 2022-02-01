@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { BadgeModule } from "./badge.module";
 import { AppComponent } from "./app.component";
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, BadgeModule],

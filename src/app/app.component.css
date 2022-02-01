@@ -17,14 +17,4 @@ button{
     color: #fff;
     padding: 8px 35px;
     border-radius: 100px;
-}.noticount{
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    background: green;
-    color: #fff;
-    transform: translate(50%,-50%);
-    font-size: 16px;
 }
