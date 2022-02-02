@@ -7,13 +7,13 @@
 section{
     height: 100vh;
     display: flex;
-    justify-content: center;
+    
     align-items: center;
 }
 button{
     position: relative;
     outline: none;
-    background: red;
+   
     color: #fff;
     padding: 8px 35px;
     border-radius: 100px;

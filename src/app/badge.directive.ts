@@ -26,6 +26,9 @@ export class BadgeDirective implements OnInit, OnChanges {
     el.innerText=`${this.appBadge}`
     this.renderer.addClass(el, 'app-badge')
     this.badgeElement = el
+    this.badgeElement.style.backgroundColor="black"
+    this.elementRef.nativeElement.style.backgroundColor="pink"
+ 
   }
   appendBadgeToView() {
     if (this.badgeElement) {
