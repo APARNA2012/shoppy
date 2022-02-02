@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BadgePositions } from './badge.interface';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'badge';
   count=0;
-increment(){
-  this.count++
-  console.log(this.count)
-}
+  badgePosition:BadgePositions="top-right";
+  increment(){
+    this.count++
+    console.log(this.count)
+  }
 }

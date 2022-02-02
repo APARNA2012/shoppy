@@ -1,40 +1,81 @@
+import {
+  Directive,
+  ElementRef,
+  Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
-import { Directive, ElementRef, Inject, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
+import { BadgeSizes, BadgePositions, BadgeVariants } from './badge.interface';
+
 @Directive({
-  selector: '[appBadge]'
+  selector: '[badge]',
 })
-export class BadgeDirective implements OnInit, OnChanges {
-  badgeElement: HTMLSpanElement | undefined
-  @Input()appBadge:string|number=0
+export class Badge implements OnChanges, OnDestroy {
+  @Input() badge = '0';
+  @Input() size: BadgeSizes = 'medium';
+  @Input() position: BadgePositions = 'top-right';
+  @Input() customBadgeClasses: string | null = null;
+  @Input() variant: BadgeVariants = 'secondary';
+
+  badgeElement: HTMLElement | null = null;
+
   constructor(
-    // to create a badge element (HTML ELEMENT - SPAN)
-    private renderer: Renderer2,
-    private elementRef: ElementRef<HTMLElement>
+    @Inject(DOCUMENT) private document: Document,
+    private elRef: ElementRef<HTMLElement>
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.badgeElement){
-    this.badgeElement.innerText=`${this.appBadge}`
+    if ('badge' in changes) {
+      const value = `${changes['badge'].currentValue}`.trim();
+      if (value?.length > 0) {
+        this.updateBadgeText(value);
+      }
+    }
+    if ('position' in changes) {
+      
+      const [prevVPosition,prevHPosition] = `${changes['position'].currentValue}`.trim().split('-');
+      this.badgeElement?.classList.remove(prevVPosition);
+      this.badgeElement?.classList.remove(prevHPosition);
+      console.log(this.badgeElement?.classList)
+      const value = `${changes['position'].currentValue}`.trim();
+      const [vPos, hPos] = value.split('-');
+      this.badgeElement?.classList.add('badge', vPos, hPos);
     }
   }
-  ngOnInit() {
-    this.createBadgeElement()
-    this.appendBadgeToView()
-  }
-  createBadgeElement() {
-    const el: HTMLSpanElement = this.renderer.createElement('span')
-    el.innerText=`${this.appBadge}`
-    this.renderer.addClass(el, 'app-badge')
-    this.badgeElement = el
-    this.badgeElement.style.backgroundColor="black"
-    this.elementRef.nativeElement.style.backgroundColor="pink"
- 
-  }
-  appendBadgeToView() {
+
+  ngOnDestroy() {
     if (this.badgeElement) {
-      this.renderer.appendChild(this.elementRef.nativeElement, this.badgeElement);
+      this.badgeElement.remove();
     }
-  } 
+  }
+
+  private updateBadgeText(value: string) {
+    if (!this.badgeElement) {
+      this.badgeElement = this.createBadge(value);
+    } else {
+      this.badgeElement.textContent = value;
+    }
+  }
+
+  private createBadge(value: string): HTMLElement {
+    const badgeElement = this.document.createElement('span');
+    this.addClasses(badgeElement);
+    badgeElement.textContent = value;
+    this.elRef.nativeElement.classList.add('badge-container');
+    this.elRef.nativeElement.appendChild(badgeElement);
+    return badgeElement;
+  }
+
+  private addClasses(badgeElement: HTMLElement) {
+    const [vPos, hPos] = this.position.split('-');
+    badgeElement.classList.add('badge', vPos, hPos);
+    if (this.customBadgeClasses) {
+      const customClasses = this.customBadgeClasses.split(' ');
+      badgeElement.classList.add(...customClasses);
+    }
+    badgeElement.classList.add(this.variant);
+    badgeElement.classList.add(this.size);
+  }
 }
-
-
