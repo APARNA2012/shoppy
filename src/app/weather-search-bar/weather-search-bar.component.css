@@ -1,0 +1,26 @@
+.search_box {
+  position: relative;
+}
+
+input {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 45px;
+  width: 458px;
+  outline: white;
+  border: 2px solid #fff;
+}
+
+::-webkit-input-placeholder {
+  color: #fff;
+}
+
+img {
+  position: absolute;
+  top: 25%;
+  right: 15px;
+  height: 24px;
+  width: 24px;
+  left: 410px;
+}
+/*# sourceMappingURL=weather-search-bar.component.css.map */
